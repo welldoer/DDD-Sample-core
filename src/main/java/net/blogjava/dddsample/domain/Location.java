@@ -1,7 +1,5 @@
 package net.blogjava.dddsample.domain;
 
-import java.util.function.IntPredicate;
-
 public class Location {
 	private final String unlocode;
 

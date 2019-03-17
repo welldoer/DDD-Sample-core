@@ -9,7 +9,7 @@ public class HandlingEvent implements Comparable<HandlingEvent>{
 
 	public Type type() {
 		return type;
-	};
+	}
 
 	public enum Type {
 		ON, OFF;
