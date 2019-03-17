@@ -1,13 +1,15 @@
 # DDD-Sample-core
 
-阅读《Java 8 实战》，学习其中的流式、函数式编程思想
+跟随 DDD Sample，参阅：
+	《领域驱动设计》、《领域驱动设计模式、原理与实践》、《领域驱动设计精粹》
 
 [![Build Status](https://travis-ci.com/welldoer/DDD-Sample-core.svg?branch=master)](https://travis-ci.com/welldoer/DDD-Sample-core)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=welldoer_DDD-Sample-core&metric=coverage)](https://sonarcloud.io/dashboard?id=welldoer_DDD-Sample-core)
 
-【说明】
-[DDD Sample project](https://github.com/citerus/dddsample-core.git)
-[DDD Community examples](http://dddcommunity.org/examples2)
+【说明】：
+[DDD Sample project](https://github.com/citerus/dddsample-core.git)、
+[DDD Community examples](http://dddcommunity.org/examples2)、
+[original DDD Sample project](http://dddsample.sourceforge.net)
 
 #### 待开发任务清单
 
@@ -19,4 +21,6 @@
 
 ~~4. 准备最简的代码，用于验证环境~~
 
-5. 编写第一章代码
+5. 参考 github commits，跟进 #1 9c39b19，跳过 #2-5
+
+6. 准备下一个 #6 2833649  2007/12/14
