@@ -1,23 +1,37 @@
 package net.blogjava.dddsample.domain;
 
-public class HandlingEvent implements Comparable<HandlingEvent>{
-	private final Type type;
+import java.util.Date;
 
-	public HandlingEvent(Type type, CarrierMovement carrierMovement) {
+public class HandlingEvent implements Comparable<HandlingEvent>{
+	private final Date time;
+	private final Type type;
+	private final CarrierMovement carrierMovement;
+
+	public enum Type {
+		ON, OFF;
+	}
+
+	public HandlingEvent(Date time, Type type, CarrierMovement carrierMovement) {
+		this.time = time;
 		this.type = type;
+		this.carrierMovement = carrierMovement;
 	}
 
 	public Type type() {
 		return type;
 	}
 
-	public enum Type {
-		ON, OFF;
+	public CarrierMovement getCarrierMovement() {
+		return carrierMovement;
 	}
-
+	
+	public Date time() {
+		return time;
+	}
+	
 	@Override
 	public int compareTo(HandlingEvent o) {
-		return (int) Math.round(Math.random() * 1000);
+		return time.compareTo(o.time());
 	}
 
 }
