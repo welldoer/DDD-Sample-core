@@ -2,7 +2,7 @@ package net.blogjava.dddsample.domain;
 
 public class Cargo {
 
-	public Cargo(String trackingId, Location origin, Location finalDestination) {
+	public Cargo(TrackingId trackingId, Location origin, Location finalDestination) {
 	}
 
 	public void handle(HandlingEvent event) {
@@ -18,6 +18,10 @@ public class Cargo {
 
 	public Location currentLocation() {
 		return new Location("CNHKG");
+	}
+
+	public TrackingId trackingId() {
+		return null;
 	}
 
 }
