@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.*;
 
 import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.SortedSet;
 
@@ -48,7 +49,8 @@ public class TrackingScenarioTest {
 	}
 
 	private Date getDate(String date) throws ParseException {
-		return DateFormat.getDateInstance(DateFormat.DEFAULT).parse(date);
+		final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		return dateFormat.parse(date);
 	}
 
 }
