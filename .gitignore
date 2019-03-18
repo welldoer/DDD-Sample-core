@@ -1,5 +1,6 @@
 /bin/
 .gradle/
 .settings/
+log/
 .classpath
 .project

@@ -33,7 +33,7 @@ public class Cargo {
 	}
 
 	public TrackingId trackingId() {
-		return null;
+		return trackingId;
 	}
 
 }
