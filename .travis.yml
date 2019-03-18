@@ -18,5 +18,5 @@ before_script:
 
 script:
   - gradle check
-  - cat /home/travis/build/welldoer/DDD-Sample-core/build/test-results/test/TEST-net.blogjava.*.xml
+#  - cat /home/travis/build/welldoer/DDD-Sample-core/build/test-results/test/TEST-net.blogjava.*.xml
   - sonar-scanner

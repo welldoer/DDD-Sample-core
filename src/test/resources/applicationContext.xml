@@ -22,4 +22,7 @@
 	<bean id="cargoRepository" class="net.blogjava.dddsample.repository.CargoRepositoryInMem">
 	</bean>
 
+	<bean id="cargoService" class="net.blogjava.dddsample.service.CargoServiceImpl">
+		<property name="cargoRepository" ref="cargoRepository" />
+	</bean>
 </beans>
