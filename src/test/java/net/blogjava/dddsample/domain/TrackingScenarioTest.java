@@ -27,7 +27,7 @@ public class TrackingScenarioTest {
 		
 		assertThat(handlingEvents.size()).isEqualTo(4);
 		final HandlingEvent event = handlingEvents.last();
-		assertThat(event.type()).isEqualTo(HandlingEvent.Type.OFF);
+		assertThat(event.type()).isEqualTo(HandlingEvent.Type.UNLOAD);
 		assertThat(cargo.atFinalDestiation()).isFalse();
 		assertThat(cargo.currentLocation().unlocode()).isEqualTo("CNHKG");
 	}
@@ -37,13 +37,13 @@ public class TrackingScenarioTest {
 		
 		final CarrierMovement stockholmToHamburg = new CarrierMovement(new Location("SESTO"), new Location("DEHAM"));
 		
-		cargo.handle(new HandlingEvent(getDate("2007-12-01"), HandlingEvent.Type.ON, stockholmToHamburg));
-		cargo.handle(new HandlingEvent(getDate("2007-12-02"), HandlingEvent.Type.OFF, stockholmToHamburg));
+		cargo.handle(new HandlingEvent(getDate("2007-12-01"), HandlingEvent.Type.LOAD, stockholmToHamburg));
+		cargo.handle(new HandlingEvent(getDate("2007-12-02"), HandlingEvent.Type.UNLOAD, stockholmToHamburg));
 		
 		final CarrierMovement hamburgToHongKong = new CarrierMovement(new Location("DEHAM"), new Location("CNHKG"));
 		
-		cargo.handle(new HandlingEvent(getDate("2007-12-03"), HandlingEvent.Type.ON, hamburgToHongKong));
-		cargo.handle(new HandlingEvent(getDate("2007-12-04"), HandlingEvent.Type.OFF, hamburgToHongKong));
+		cargo.handle(new HandlingEvent(getDate("2007-12-03"), HandlingEvent.Type.LOAD, hamburgToHongKong));
+		cargo.handle(new HandlingEvent(getDate("2007-12-04"), HandlingEvent.Type.UNLOAD, hamburgToHongKong));
 		
 		return cargo;
 	}

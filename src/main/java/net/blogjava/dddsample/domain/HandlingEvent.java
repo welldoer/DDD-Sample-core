@@ -8,7 +8,7 @@ public class HandlingEvent implements Comparable<HandlingEvent>{
 	private final CarrierMovement carrierMovement;
 
 	public enum Type {
-		ON, OFF;
+		LOAD, UNLOAD;
 	}
 
 	public HandlingEvent(Date time, Type type, CarrierMovement carrierMovement) {

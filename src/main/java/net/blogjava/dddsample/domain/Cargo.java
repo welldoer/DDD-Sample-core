@@ -32,7 +32,7 @@ public class Cargo {
 			return origin;
 		
 		CarrierMovement cm = lastEvent.getCarrierMovement();
-		return (lastEvent.type() == HandlingEvent.Type.ON) ? cm.from() : cm.to();
+		return (lastEvent.type() == HandlingEvent.Type.LOAD) ? cm.from() : cm.to();
 	}
 
 	public TrackingId trackingId() {
