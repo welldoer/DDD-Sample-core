@@ -17,6 +17,15 @@ public class CargoTest {
 	}
 
 	@Test
+	public void testCurrentLocationAtOrigin() throws Exception {
+	    Location destination = new Location("AUMEL");
+	    Location origin = new Location("SESTO");
+	    Cargo cargo = new Cargo(new TrackingId("XYZ"), origin, destination);
+
+	    assertThat(cargo.currentLocation()).isEqualTo(origin);
+	}
+	
+	@Test
 	public void testCurrentLocationUnloaded() throws Exception {
 		Cargo cargo = populateCargoOffHongKong();
 		

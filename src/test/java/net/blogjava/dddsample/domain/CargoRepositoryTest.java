@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import net.blogjava.dddsample.repository.CargoRepository;
 import net.blogjava.dddsample.repository.CargoRepositoryInMem;
 
 public class CargoRepositoryTest {
@@ -16,9 +17,10 @@ public class CargoRepositoryTest {
 	@Test
 	public void testFindByCargoId() throws Exception {
 		
-		CargoRepository repository = new CargoRepositoryInMem();
+		CargoRepository cargoRepository = new CargoRepositoryInMem();
+		
 		final TrackingId trackingId = new TrackingId("XYZ");
-		Cargo cargo = repository.find(trackingId);
+		Cargo cargo = cargoRepository.find(trackingId);
 		
 		assertThat(cargo.trackingId()).isEqualTo(trackingId);
 	}

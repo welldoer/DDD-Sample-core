@@ -29,6 +29,9 @@ dependencies {
 //	implementation 'org.springframework:spring-webmvc:2.5'
 //	implementation 'javax.servlet:servlet-api:2.5'
 //	implementation 'org.hibernate:hibernate:3.2.5.ga'
+
+	implementation 'org.springframework:spring-tx:4.0.5.RELEASE'
+
 	implementation 'hsqldb:hsqldb:1.8.0.7'
 	implementation 'org.apache.commons:commons-lang3:3.8.1'
 

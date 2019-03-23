@@ -4,6 +4,6 @@ import net.blogjava.dddsample.domain.Cargo;
 
 public interface CargoService {
 
-	Cargo find(String string);
+	Cargo find(String trackingId);
 
 }
