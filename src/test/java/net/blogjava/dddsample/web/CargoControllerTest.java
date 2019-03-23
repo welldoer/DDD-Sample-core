@@ -1,7 +1,7 @@
 package net.blogjava.dddsample.web;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -45,6 +45,30 @@ public class CargoControllerTest {
 		.andExpect(model().attribute("location", new Location("CNHKG")))
 		.andExpect(view().name("cargo"))
 		.andDo(print());
+	}
+
+	@Test
+	public void testStartPathOk() throws Exception {
+		mockMvc.perform(get("/start"))
+			.andExpect(status().isOk())
+			.andExpect(model().attribute("trackCommand", new TrackCommand()))
+			.andExpect(view().name("start"));
+	}
+	
+	@Test
+	public void testResultPostNotFound() throws Exception {
+		mockMvc.perform(post("/result").param("trackingId", "abc"))
+			.andExpect(status().isOk())
+			.andExpect(view().name("cargo"))
+			.andExpect(model().attributeDoesNotExist("location"));
+	}
+
+	@Test
+	public void testResultPostOk() throws Exception {
+		mockMvc.perform(post("/result").param("trackingId", "XYZ"))
+			.andExpect(status().isOk())
+			.andExpect(view().name("cargo"))
+			.andExpect(model().attribute("location", new Location("CNHKG")));
 	}
 
 }
