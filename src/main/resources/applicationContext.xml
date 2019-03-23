@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 
+		Properties
+	 -->
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:jdbc.properties</value>
+				<value>classpath:log4j.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- 
+		Beans
+	 -->
+	<bean id="cargoRepository" class="net.blogjava.dddsample.repository.CargoRepositoryInMem">
+	</bean>
+
+	<bean id="cargoService" class="net.blogjava.dddsample.service.CargoServiceImpl">
+		<property name="cargoRepository" ref="cargoRepository" />
+	</bean>
+</beans>
