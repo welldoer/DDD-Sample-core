@@ -1,10 +1,11 @@
 package net.blogjava.dddsample.web;
 
 import static org.assertj.core.api.Assertions.*;
-
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -18,10 +19,12 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import net.blogjava.dddsample.domain.Location;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration("src/test/webapp")
 @ContextConfiguration("classpath:/springmvc-servlet.xml")
-public class WebApplicationTest {
+public class CargoControllerTest {
 	@Autowired
 	private WebApplicationContext applicationContext;
 	
@@ -36,18 +39,12 @@ public class WebApplicationTest {
 	}
 
 	@Test
-	public void testWebApp() {
-		assertThat(applicationContext).isNotNull();
-		assertThat(servletContext).isNotNull();
-	}
-	
-	@Test
-	public void helloReaderControllerWorksOk() throws Exception {
-		mockMvc.perform(get("/hello"))
-				.andExpect(status().isOk())
-				.andExpect(model().attribute("message", "Hello Reader!"))
-				.andExpect(view().name("helloReader"))
-				.andDo(print());
+	public void testCargoPathOk() throws Exception {
+		mockMvc.perform(get("/cargo"))
+		.andExpect(status().isOk())
+		.andExpect(model().attribute("location", new Location("CNHKG")))
+		.andExpect(view().name("cargo"))
+		.andDo(print());
 	}
 
 }
