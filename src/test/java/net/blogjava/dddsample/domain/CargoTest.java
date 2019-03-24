@@ -17,14 +17,28 @@ public class CargoTest {
 	}
 
 	@Test
-	public void testCurrentLocationAtOrigin() throws Exception {
+	public void testCurrentLocationUnknownWhenNoEvents() throws Exception {
 	    Location destination = new Location("AUMEL");
 	    Location origin = new Location("SESTO");
 	    Cargo cargo = new Cargo(new TrackingId("XYZ"), origin, destination);
 
-	    assertThat(cargo.getCurrentLocation()).isEqualTo(origin);
+	    assertThat(cargo.getCurrentLocation()).isEqualTo(Location.NULL);
 	}
 	
+	@Test
+	public void testCurrentLocationReceived() throws Exception {
+		Cargo cargo = populateCargoReceivedStockholm();
+		
+	    assertThat(cargo.getCurrentLocation()).isEqualTo(new Location("SESTO"));
+	}
+
+	@Test
+	public void testCurrentLocationClaimed() throws Exception {
+		Cargo cargo = populateCargoClaimedMelbourne();
+
+	    assertThat(cargo.getCurrentLocation()).isEqualTo(new Location("AUMEL"));
+	}
+		
 	@Test
 	public void testCurrentLocationUnloaded() throws Exception {
 		Cargo cargo = populateCargoOffHongKong();
@@ -53,6 +67,22 @@ public class CargoTest {
 		assertThat(cargo.atFinalDestiation()).isFalse();
 	}
 
+	private Cargo populateCargoReceivedStockholm() throws Exception {
+		final Cargo cargo = new Cargo(new TrackingId("XYZ"), new Location("SESTO"), new Location("AUMEL"));
+
+		cargo.handle(new HandlingEvent(getDate("2007-12-01"), HandlingEvent.Type.RECEIVE, null));
+
+		return cargo;
+	}
+
+	private Cargo populateCargoClaimedMelbourne() throws Exception {
+		final Cargo cargo = populateCargoOffMelbourne();
+
+		cargo.handle(new HandlingEvent(getDate("2007-12-09"), HandlingEvent.Type.CLAIM, null));
+
+		return cargo;
+	}
+	
 	private Cargo populateCargoOffHongKong() throws Exception {
 		final Cargo cargo = new Cargo(new TrackingId("XYZ"), new Location("SESTO"), new Location("AUMEL"));
 		

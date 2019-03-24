@@ -212,6 +212,14 @@ input.radio {
 	background: #FFCCFF;
 }
 
+.event-type-RECEIVE {
+	background: #FFFF99;
+}
+
+.event-type-CLAIM {
+	background: #66FF99;
+}
+
 .error {
 	color: #CC0033;
 } 
