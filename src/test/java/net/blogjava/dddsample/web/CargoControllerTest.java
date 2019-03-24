@@ -7,19 +7,31 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
+import java.util.Map;
+
+import static org.mockito.Mockito.*;
+
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockServletContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import net.blogjava.dddsample.domain.Cargo;
 import net.blogjava.dddsample.domain.Location;
+import net.blogjava.dddsample.domain.TrackingId;
+import net.blogjava.dddsample.repository.CargoRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration("src/test/webapp")
@@ -32,7 +44,13 @@ public class CargoControllerTest {
 	private MockServletContext servletContext;
 	
 	private MockMvc mockMvc;
-
+	
+	@Rule
+	public MockitoRule rule = MockitoJUnit.rule();
+	
+	@Mock
+	private Map<String, Cargo> mockCargoDb;
+	
 	@Before
 	public void setUp() throws Exception {
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.applicationContext).build();
@@ -70,5 +88,20 @@ public class CargoControllerTest {
 			.andExpect(view().name("cargo"))
 			.andExpect(model().attribute("location", new Location("CNHKG")));
 	}
+
+	@Test
+	public void testResultPostMock() throws Exception {
+		CargoRepository cargoRepository = (CargoRepository) applicationContext.getBean("cargoRepository");
+
+		ReflectionTestUtils.setField(cargoRepository, "cargoDb", mockCargoDb);
+//		doReturn(new Cargo(new TrackingId("123"), new Location("456"), new Location("789"))).when(mockCargoDb).get(any());
+		when(mockCargoDb.get(any())).thenReturn(new Cargo(new TrackingId("Track123"), new Location("L456"), new Location("L789")));
+		
+		mockMvc.perform(post("/result").param("trackingId", "XYZ"))
+			.andExpect(status().isOk())
+			.andExpect(view().name("cargo"))
+			.andExpect(model().attribute("location", new Location("L456")));
+	}
+
 
 }
