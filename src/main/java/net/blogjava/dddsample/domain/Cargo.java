@@ -18,21 +18,20 @@ public class Cargo {
 		history.addEvent(event);
 	}
 
-	public DeliveryHistory deliveryHistory() {
+	public DeliveryHistory getDeliveryHistory() {
 		return history;
 	}
 
 	public boolean atFinalDestiation() {
-		return currentLocation().equals(finalDestination);
+		return getCurrentLocation().equals(finalDestination);
 	}
 
-	public Location currentLocation() {
+	public Location getCurrentLocation() {
 		HandlingEvent lastEvent = history.last();
 		if(lastEvent == null)
 			return origin;
-		
-		CarrierMovement cm = lastEvent.getCarrierMovement();
-		return (lastEvent.type() == HandlingEvent.Type.LOAD) ? cm.from() : cm.to();
+
+		return lastEvent.getLocation();
 	}
 
 	public TrackingId trackingId() {

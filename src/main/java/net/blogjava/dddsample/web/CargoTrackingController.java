@@ -26,7 +26,7 @@ public class CargoTrackingController {
 		
 		ModelAndView modelAndView = new ModelAndView("cargo");
 		if(cargo != null)
-			modelAndView.addObject("location", cargo.currentLocation());
+			modelAndView.addObject("location", cargo.getCurrentLocation());
 
 		return modelAndView;
 	}

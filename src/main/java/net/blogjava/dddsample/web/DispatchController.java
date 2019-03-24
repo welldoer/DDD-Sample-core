@@ -18,7 +18,7 @@ public class DispatchController {
 		Cargo cargo = cargoService.find("XYZ");
 		
 		ModelAndView mv = new ModelAndView("cargo");
-		mv.addObject("location", cargo.currentLocation());
+		mv.addObject("location", cargo.getCurrentLocation());
 		
 		return mv;
 	}

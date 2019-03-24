@@ -22,21 +22,21 @@ public class CargoTest {
 	    Location origin = new Location("SESTO");
 	    Cargo cargo = new Cargo(new TrackingId("XYZ"), origin, destination);
 
-	    assertThat(cargo.currentLocation()).isEqualTo(origin);
+	    assertThat(cargo.getCurrentLocation()).isEqualTo(origin);
 	}
 	
 	@Test
 	public void testCurrentLocationUnloaded() throws Exception {
 		Cargo cargo = populateCargoOffHongKong();
 		
-		assertThat(cargo.currentLocation()).isEqualTo(new Location("CNHKG"));
+		assertThat(cargo.getCurrentLocation()).isEqualTo(new Location("CNHKG"));
 	}
 	
 	@Test
 	public void testCurrentLocationloaded() throws Exception {
 		Cargo cargo = populateCargoOnHamburg();
 		
-		assertThat(cargo.currentLocation()).isEqualTo(new Location("DEHAM"));
+		assertThat(cargo.getCurrentLocation()).isEqualTo(new Location("DEHAM"));
 	}
 
 	@Test

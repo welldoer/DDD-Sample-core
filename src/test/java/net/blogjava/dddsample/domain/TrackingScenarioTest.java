@@ -21,15 +21,15 @@ public class TrackingScenarioTest {
 	public void testTrackingScenarioStage1() throws Exception {
 		Cargo cargo = populateCargo();
 		
-		DeliveryHistory deliveryHistory = cargo.deliveryHistory();
+		DeliveryHistory deliveryHistory = cargo.getDeliveryHistory();
 		
 		SortedSet<HandlingEvent> handlingEvents = deliveryHistory.events();
 		
 		assertThat(handlingEvents.size()).isEqualTo(4);
 		final HandlingEvent event = handlingEvents.last();
-		assertThat(event.type()).isEqualTo(HandlingEvent.Type.UNLOAD);
+		assertThat(event.getType()).isEqualTo(HandlingEvent.Type.UNLOAD);
 		assertThat(cargo.atFinalDestiation()).isFalse();
-		assertThat(cargo.currentLocation().unlocode()).isEqualTo("CNHKG");
+		assertThat(cargo.getCurrentLocation().unlocode()).isEqualTo("CNHKG");
 	}
 
 	private Cargo populateCargo() throws Exception {

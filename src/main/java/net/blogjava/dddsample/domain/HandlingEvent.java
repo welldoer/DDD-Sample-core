@@ -17,7 +17,7 @@ public class HandlingEvent implements Comparable<HandlingEvent>{
 		this.carrierMovement = carrierMovement;
 	}
 
-	public Type type() {
+	public Type getType() {
 		return type;
 	}
 
@@ -25,13 +25,17 @@ public class HandlingEvent implements Comparable<HandlingEvent>{
 		return carrierMovement;
 	}
 	
-	public Date time() {
+	public Date getTime() {
 		return time;
+	}
+	
+	public Location getLocation() {
+		return (type == HandlingEvent.Type.LOAD) ? carrierMovement.from() : carrierMovement.to();
 	}
 	
 	@Override
 	public int compareTo(HandlingEvent o) {
-		return time.compareTo(o.time());
+		return time.compareTo(o.getTime());
 	}
 
 }
