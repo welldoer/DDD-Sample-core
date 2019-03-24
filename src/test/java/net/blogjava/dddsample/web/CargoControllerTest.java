@@ -77,16 +77,19 @@ public class CargoControllerTest {
 	public void testResultPostNotFound() throws Exception {
 		mockMvc.perform(post("/result").param("trackingId", "abc"))
 			.andExpect(status().isOk())
-			.andExpect(view().name("cargo"))
-			.andExpect(model().attributeDoesNotExist("location"));
+			.andExpect(view().name("start"))
+			.andExpect(model().attribute("trackCommand", new TrackCommand()))
+			.andExpect(model().attribute("trackingId", "abc"))
+			.andExpect(model().attributeDoesNotExist("cargo"));
 	}
 
 	@Test
 	public void testResultPostOk() throws Exception {
+		CargoRepository cargoRepository = (CargoRepository) applicationContext.getBean("cargoRepository");
 		mockMvc.perform(post("/result").param("trackingId", "XYZ"))
 			.andExpect(status().isOk())
-			.andExpect(view().name("cargo"))
-			.andExpect(model().attribute("location", new Location("CNHKG")));
+			.andExpect(view().name("start"))
+			.andExpect(model().attribute("cargo", cargoRepository.find(new TrackingId("XYZ"))));
 	}
 
 	@Test
@@ -95,12 +98,13 @@ public class CargoControllerTest {
 
 		ReflectionTestUtils.setField(cargoRepository, "cargoDb", mockCargoDb);
 //		doReturn(new Cargo(new TrackingId("123"), new Location("456"), new Location("789"))).when(mockCargoDb).get(any());
-		when(mockCargoDb.get(any())).thenReturn(new Cargo(new TrackingId("Track123"), new Location("L456"), new Location("L789")));
+		Cargo cargo = new Cargo(new TrackingId("Track123"), new Location("L456"), new Location("L789"));
+		when(mockCargoDb.get(any())).thenReturn(cargo);
 		
 		mockMvc.perform(post("/result").param("trackingId", "XYZ"))
 			.andExpect(status().isOk())
-			.andExpect(view().name("cargo"))
-			.andExpect(model().attribute("location", new Location("L456")));
+			.andExpect(view().name("start"))
+			.andExpect(model().attribute("cargo", cargo));
 	}
 
 

@@ -1,0 +1,33 @@
+html {
+	margin: 0;
+	padding: 0;
+}
+body { 
+	font: 75% georgia, sans-serif;
+	line-height: 1.88889;
+	color: #555753; 
+	background: #fff url(blossoms.jpg) no-repeat bottom right; 
+	margin: 0; 
+	padding: 0;
+}
+p { 
+	margin-top: 0; 
+	text-align: justify;
+}
+#form {
+	padding: 0 175px 0 110px; 
+	font: 10pt/22pt georgia;
+}
+#result {
+	padding: 0 175px 0 110px; 
+	font: italic 10pt/22pt georgia; 
+	text-align:right;
+}
+#currentLocation{
+	font: bold 10pt/22pt georgia;
+	position: relative;
+}
+#result table{
+	text-align:left;
+	font: 10pt/22pt georgia;
+}
